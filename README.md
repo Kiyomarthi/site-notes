@@ -15,7 +15,8 @@ All your data is stored locally in Chrome storage, scoped by domain.
 
 ## Screenshots
 
-_(Add some screenshots here if you want)_
+![screenshot](assets/demo1.png)
+![demo](assets/demo2.png)
 
 ## Installation
 
