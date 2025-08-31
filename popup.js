@@ -122,24 +122,44 @@ function refreshSitesList() {
 }
 
 // initialization
+
 document.addEventListener("DOMContentLoaded", async () => {
-  try {
-    currentHost = new URL(
-      (
-        await new Promise((r) =>
-          chrome.tabs.query({ active: true, currentWindow: true }, r)
-        )
-      )[0].url
-    ).hostname;
-  } catch {
-    currentHost = null;
-  }
+  // Determine the active tab host first
+  activeTabHost = await getActiveHost(); // helper returns hostname or null
+
+  // Bind UI events (always)
   bindEvents();
+
+  // Refresh list of saved sites (updates side list and activeTabHost)
   const hosts = await refreshSitesList();
-  if (currentHost && hosts.includes(currentHost)) selectSite(currentHost);
-  else if (hosts.length) selectSite(hosts[0]);
-  else {
-    titleHostEl.textContent = currentHost || "(none)";
+
+  // If there's an active browser tab host, prefer it (even if it's not yet in storage)
+  if (activeTabHost) {
+    currentHost = activeTabHost;
+
+    // Try to load stored data for this host; if none, render empty for this host
+    chrome.storage.local.get([currentHost], (res) => {
+      const d = res[currentHost];
+      titleHostEl.textContent = currentHost || "(none)";
+      if (d) {
+        // Stored data exists => render it
+        renderTasks(d.tasks || []);
+        notesText.value = d.notes || "";
+        renderFiles(d.files || []);
+      } else {
+        // No stored data yet for this host => show empty state for this host
+        renderEmptyData();
+      }
+    });
+    return;
+  }
+
+  // No active host (e.g. chrome:// or no tab URL) => fallback to any saved host (if exists)
+  if (hosts && hosts.length > 0) {
+    selectSite(hosts[0]);
+  } else {
+    currentHost = null;
+    titleHostEl.textContent = "(none)";
     renderEmptyData();
   }
 });
