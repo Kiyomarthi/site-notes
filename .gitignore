@@ -1,0 +1,58 @@
+# Node / tooling
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# Build output (adjust if you use different folder name)
+dist/
+build/
+out/
+
+# Packaged extension artifacts
+*.zip
+*.crx
+
+# Private keys / credentials
+*.pem
+.env
+.env.*      # .env.local, .env.production, ...
+
+# Editor / OS files
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+.DS_Store
+Thumbs.db
+
+# Logs / temp
+*.log
+*.log.*
+tmp/
+temp/
+.cache/
+.cache/
+
+# Coverage / test output
+coverage/
+nyc_output/
+
+# Misc
+*.bak
+*.swp
+*.tmp
+*.orig
+
+# GitHub Pages build (if you keep gh-pages/ or docs/)
+/docs/.vuepress/dist/
+/gh-pages/
+
+# Optional: if you keep generated icons or screenshots locally and don't want them in repo
+# icons/generated/
+# screenshots/*.png
+
+# If you want to keep any of the above in repo (e.g. packaged zip or dist) --> remove/comment that line
