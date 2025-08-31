@@ -1,27 +1,34 @@
-# Site Notes — Chrome extension
+# Site Notes Extension
 
-Lightweight browser extension to keep tasks, notes and file metadata per-site in the popup.
+A lightweight Chrome extension to manage **tasks, notes, and files per website**.  
+All your data is stored locally in Chrome storage, scoped by domain.
 
 ## Features
 
-- Per-site tasks & notes & file metadata
-- Persistent storage (chrome.storage.local)
-- Copy / Clear / Export features
-- Simple UI with hamburger menu and site lists
+- ✅ Add tasks (with check, copy, delete)
+- ✅ Add notes (auto-save, copy, clear)
+- ✅ Upload files (list, delete)
+- ✅ Keep everything per-site (each domain has its own notes & tasks)
+- ✅ View and switch between all saved sites
+- ✅ Modern hamburger menu with animations
+- ✅ Minimal memory usage (no background polling)
 
-## Install (developer / local)
+## Screenshots
 
-1. Clone this repo
-2. Open `chrome://extensions/` and enable _Developer mode_
-3. Click _Load unpacked_ and select this folder
+_(Add some screenshots here if you want)_
 
-## Building / Packaging
+## Installation
 
-If you have a build step, run:
+1. Clone or download this repository.
+2. Open **Chrome** and go to `chrome://extensions/`.
+3. Enable **Developer mode** (top right).
+4. Click **Load unpacked** and select this folder.
+5. The extension will now appear in your toolbar.
+
+## Packaging for Release
+
+If you want to distribute:
 
 ```bash
-npm install
-npm run build
-# then create ZIP (manifest.json must be in the zip root)
-cd dist && zip -r ../site-notes-v1.0.zip . -x '*.git*'
+zip -r site-notes-v1.0.zip . -x '*.git*'
 ```
